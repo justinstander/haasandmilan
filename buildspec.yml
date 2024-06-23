@@ -1,8 +1,0 @@
-version: 0.2
-phases:
-  build:
-    commands:
-      - echo Build started on `date`
-      - aws s3 cp . s3://$haasandmilan-com-bucket --recursive --exclude "README.md" --exclude "buildspec.yml"
-      - aws cloudfront create-invalidation --paths "/index.html" --distribution-id $distribution
-      
