@@ -1,7 +1,12 @@
 version: 0.2
+env:
+  parameter-store:
+    AWS_CLOUDFRONT_DISTRIBUTION: "/CodeBuild/distribution"
+    AWS_S3_BUCKET: "/CodeBuild/haasandmilan-com-bucket"
 phases:
   build:
     commands:
       - echo Build started on `date`
-      - aws s3 cp . s3://aws-haasandmilan-com --recursive --exclude "README.md" --exclude "buildspec.yml"
+      - aws s3 cp . s3://${AWS_S3_BUCKET} --recursive --exclude "README.md" --exclude "buildspec.yml"
+      - aws cloudfront create-invalidation --paths "/index.html" --distribution-id ${AWS_CLOUDFRONT_DISTRIBUTION}
       
