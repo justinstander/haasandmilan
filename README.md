@@ -1,2 +1,2 @@
 # haasandmilan
-https://haasandmilan.com
+<https://haasandmilan.com>
