@@ -1,8 +1,4 @@
 version: 0.2
-env:
-  parameter-store:
-    AWS_CLOUDFRONT_DISTRIBUTION: "distribution"
-    AWS_S3_BUCKET: "haasandmilan-com-bucket"
 phases:
   build:
     commands:
