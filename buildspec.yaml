@@ -1,0 +1,7 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - aws s3 cp . s3://aws-haasandmilan-com --recursive --exclude "README.md" --exclude "buildspec.yml"
+      
