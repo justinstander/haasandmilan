@@ -1,0 +1,19 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0
+}
+
+img {
+    height: 430px;
+    width: 430px;
+}
+
+@media screen and (min-width: 768px) {
+    img {
+        height: 300px;
+        width: 768px;
+    }
+}
