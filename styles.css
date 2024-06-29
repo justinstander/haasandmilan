@@ -11,7 +11,7 @@ img {
     width: 430px;
 }
 
-@media screen and (min-width: 768px) {
+@media (width >= 768px) {
     img {
         height: 300px;
         width: 768px;
