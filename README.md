@@ -3,4 +3,4 @@
 
 # haasandmilan
 
-<https://haasandmilan.com>
+[haasandmilan.com](https://haasandmilan.com)
