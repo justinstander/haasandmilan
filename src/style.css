@@ -16,6 +16,10 @@ a {
     padding: 0.5rem 0;
 }
 
+h1 {
+    color: darkred;
+}
+
 @media (width >=768px) {
     img {
         height: 300px;
