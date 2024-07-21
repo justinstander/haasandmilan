@@ -12,7 +12,7 @@ function copy_assets() {
 
 function build_css() {
   echo 'build css'
-  sed -i -e '/\/\*style\*\//r src/style.css' build/*.html
+  find build -type f -name "*.html" -exec sed -i -e '/\/\*style\*\//r src/style.css' {} +
 }
 
 function build() {
