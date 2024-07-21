@@ -17,7 +17,7 @@ a {
 }
 
 h1 {
-    color: darkred;
+    color: maroon;
 }
 
 @media (width >=768px) {
