@@ -2,7 +2,15 @@
   "name": "haasandmilan",
   "packageManager": "yarn@4.3.1",
   "scripts": {
-    "build": "echo 'Build'",
+    "build": "dev/build.sh",
+    "clean:build": "rm -rf build",
+    "clean:dev": "rm -rf node_modules",
+    "clean": "yarn clean:build && yarn clean:dev",
+    "dev": "cd build/ && ws --https",
     "test": "echo 'Test'"
+  },
+  "type": "module",
+  "devDependencies": {
+    "local-web-server": "^5.3.4"
   }
 }
