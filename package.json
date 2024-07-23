@@ -3,10 +3,8 @@
   "packageManager": "yarn@4.3.1",
   "scripts": {
     "build": "dev/scripts.sh build",
-    "clean:build": "rm -rf build",
-    "clean:dev": "rm -rf node_modules",
-    "clean": "yarn clean:build && yarn clean:dev",
-    "dev": "cd build/ && ws --https",
+    "clean": "dev/scripts.sh clean",
+    "dev": "dev/scripts.sh dev",
     "test": "echo 'Test'"
   },
   "type": "module",
