@@ -4,5 +4,3 @@
 # haasandmilan
 
 [haasandmilan.com](https://haasandmilan.com)
-
-test
