@@ -57,7 +57,7 @@ function delete_articles_table() {
 
 case "$1" in
 "") ;;
-build | clean | dev | create_articles_table)
+build | clean | dev | create_articles_table | delete_articles_table)
   "$@"
   exit
   ;;

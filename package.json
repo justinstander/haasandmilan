@@ -5,6 +5,8 @@
     "build": "dev/scripts.sh build",
     "clean": "dev/scripts.sh clean",
     "dev": "dev/scripts.sh dev",
+    "table:create": "dev/scripts.sh create_articles_table",
+    "table:delete": "dev/scripts.sh delete_articles_table",
     "test": "echo 'Test'"
   },
   "type": "module",
