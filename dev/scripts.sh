@@ -44,9 +44,20 @@ function dev() {
     (cd build/ && ws --https)
 }
 
+function create_articles_table() {
+  echo 'creating articles table...'
+  aws dynamodb create-table --table-name articles --key-schema AttributeName=pageName,KeyType=HASH --attribute-definitions AttributeName=pageName,AttributeType=S --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+}
+
+function delete_articles_table() {
+  echo "THIS WILL DELETE THE ARTICLES TABLE"
+  read -p "Cancel now, or press any key to continue"
+  aws dynamodb delete-table --table-name articles
+}
+
 case "$1" in
 "") ;;
-build | clean | dev)
+build | clean | dev | create_articles_table | delete_articles_table)
   "$@"
   exit
   ;;
