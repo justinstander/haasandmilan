@@ -28,6 +28,7 @@ function build() {
   echo 'build...'
   create_build_directory &&
     copy_assets &&
+    render_pages &&
     build_head &&
     build_css &&
     echo '...done'
@@ -55,9 +56,20 @@ function delete_articles_table() {
   aws dynamodb delete-table --table-name articles
 }
 
+function create_page() {
+  echo "Create page $1";
+  cp src/page.html "build/$1.html"
+}
+
+function render_pages() {
+  echo "Rendering pages in DB..."
+  for page in "$(aws dynamodb scan --table-name articles | jq -r '.Items[].pageName.S')"; do create_page $page; done;
+  echo "...done"
+}
+
 case "$1" in
 "") ;;
-build | clean | dev | create_articles_table | delete_articles_table)
+build | clean | dev | create_articles_table | delete_articles_table | render_pages | create_page)
   "$@"
   exit
   ;;
