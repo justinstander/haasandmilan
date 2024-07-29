@@ -63,7 +63,7 @@ function create_page() {
 
 function render_pages() {
   echo "Rendering pages in DB..."
-  for page in "$(aws dynamodb scan --table-name articles | jq -r '.Items[].pageName.S')"; do create_page $page; done;
+  for page in $(aws dynamodb scan --table-name articles | jq -r ".Items[].pageName.S"); do create_page "$page"; done;
   echo "...done"
 }
 
