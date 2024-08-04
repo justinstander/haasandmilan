@@ -10,8 +10,5 @@
     "table:delete": "dev/scripts.sh delete_articles_table",
     "test": "echo 'Test'"
   },
-  "type": "module",
-  "devDependencies": {
-    "local-web-server": "^5.3.4"
-  }
+  "type": "module"
 }
