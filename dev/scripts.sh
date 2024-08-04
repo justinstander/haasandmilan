@@ -21,7 +21,7 @@ function build_css() {
 
 function build_head() {
   echo 'build head'
-  insert_contents "<!-- head -->" "src/head.html" 
+  insert_contents "<!-- head -->" "src/head.html"
 }
 
 function build() {
@@ -56,20 +56,26 @@ function delete_articles_table() {
   aws dynamodb delete-table --table-name articles
 }
 
+function create_item {
+  echo "creating item in table $1"
+  echo "$2"
+  aws dynamodb put-item --table-name "$1" --item "{\"pageName\":{\"S\":\"$2\"}}"
+}
+
 function create_page() {
-  echo "Create page $1";
+  echo "Create page $1"
   cp src/page.html "build/$1.html"
 }
 
 function render_pages() {
   echo "Rendering pages in DB..."
-  for page in $(aws dynamodb scan --table-name articles | jq -r ".Items[].pageName.S"); do create_page "$page"; done;
+  for page in $(aws dynamodb scan --table-name articles | jq -r ".Items[].pageName.S"); do create_page "$page"; done
   echo "...done"
 }
 
 case "$1" in
 "") ;;
-build | clean | dev | create_articles_table | delete_articles_table | render_pages | create_page)
+build | clean | dev | create_articles_table | delete_articles_table | render_pages | create_item | create_page)
   "$@"
   exit
   ;;
