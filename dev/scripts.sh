@@ -58,8 +58,8 @@ function delete_articles_table() {
 
 function create_item {
   echo "creating item in table $1..."
-  echo "$2"
-  aws dynamodb put-item --table-name "$1" --item "{\"pageName\":{\"S\":\"$2\"}}"
+  echo "$2:$3"
+  aws dynamodb put-item --table-name "$1" --item "{\"$2\":{\"S\":\"$3\"}}"
   echo "...done"
 }
 
