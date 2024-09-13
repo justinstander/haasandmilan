@@ -28,9 +28,7 @@ function build() {
   echo 'build...'
   create_build_directory &&
     copy_assets &&
-    render_pages &&
-    build_head &&
-    build_css &&
+    render_pages "$1"
     echo '...done'
 }
 
@@ -63,20 +61,23 @@ function create_item {
   echo "...done"
 }
 
-function create_page() {
+function render() {
   echo "Create page $1"
-  cp src/page.html "build/$1.html"
+  cp src/page.html "build/$1.html" &&
+    build_head &&
+    build_css
+
 }
 
 function render_pages() {
-  echo "Rendering pages in DB..."
-  for page in $(aws dynamodb scan --table-name articles | jq -r ".Items[].pageName.S"); do create_page "$page"; done
+  echo "Rendering pages in DB table: $1"
+  for page in $(aws dynamodb scan --table-name "$1" | jq -r ".Items[].pageName.S"); do render "$page"; done
   echo "...done"
 }
 
 case "$1" in
 "") ;;
-build | clean | dev | create_articles_table | delete_articles_table | render_pages | create_item | create_page)
+build | clean | dev | create_articles_table | delete_articles_table | render_pages | create_item | render)
   "$@"
   exit
   ;;
