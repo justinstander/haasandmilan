@@ -12,23 +12,23 @@ function copy_assets() {
 
 function insert_contents() {
   echo "writing to $3"
-  sed -i -e "/$1/r $2" $3
+  sed -i -e "/$1/r $2" "$3"
 }
 
 function insert_value() {
-  sed -i "s/$1/$2/g" $3
+  sed -i "s/$1/$2/g" "$3"
 }
 
 function build_css() {
   echo "build css $1"
-  insert_contents "\/\*style\*\/" "src/style.css" $1
+  insert_contents "\/\*style\*\/" "src/style.css" "$1"
 }
 
 function build_head() {
   echo "build head $1 $2 $3"
-  insert_contents "<!-- head -->" "src/head.html" $1
-  insert_value "<!-- title -->" "Haas \& Milan $2" $1
-  insert_value "::meta_description::" "$3" $1
+  insert_contents "<!-- head -->" "src/head.html" "$1"
+  insert_value "<!-- title -->" "Haas \& Milan $2" "$1"
+  insert_value "::meta_description::" "$3" "$1"
 }
 
 function build() {
@@ -71,9 +71,9 @@ function create_item {
 function render() {
   echo "Create page $1"
   fileName="build/$1.html"
-  cp src/page.html $fileName &&
-    build_head $fileName $1 "This is the $1 page" &&
-    build_css $fileName
+  cp src/page.html "$fileName" &&
+    build_head "$fileName" "$1" "This is the $1 page" &&
+    build_css "$fileName"
 
 }
 
