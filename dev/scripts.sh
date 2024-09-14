@@ -11,17 +11,24 @@ function copy_assets() {
 }
 
 function insert_contents() {
-  find build -type f -name "*.html" -exec sed -i -e "/$1/r $2" {} +
+  echo "writing to $3"
+  sed -i -e "/$1/r $2" $3
+}
+
+function insert_value() {
+  sed -i "s/$1/$2/g" $3
 }
 
 function build_css() {
-  echo 'build css'
-  insert_contents "\/\*style\*\/" "src/style.css"
+  echo "build css $1"
+  insert_contents "\/\*style\*\/" "src/style.css" $1
 }
 
 function build_head() {
-  echo 'build head'
-  insert_contents "<!-- head -->" "src/head.html"
+  echo "build head $1 $2 $3"
+  insert_contents "<!-- head -->" "src/head.html" $1
+  insert_value "<!-- title -->" "Haas \& Milan $2" $1
+  insert_value "::meta_description::" "$3" $1
 }
 
 function build() {
@@ -63,15 +70,18 @@ function create_item {
 
 function render() {
   echo "Create page $1"
-  cp src/page.html "build/$1.html" &&
-    build_head &&
-    build_css
+  fileName="build/$1.html"
+  cp src/page.html $fileName &&
+    build_head $fileName $1 "This is the $1 page" &&
+    build_css $fileName
 
 }
 
 function render_pages() {
   echo "Rendering pages in DB table: $1"
   for page in $(aws dynamodb scan --table-name "$1" | jq -r ".Items[].pageName.S"); do render "$page"; done
+  render "404"
+  render "503"
   echo "...done"
 }
 
