@@ -2,12 +2,13 @@
   "name": "haasandmilan",
   "packageManager": "yarn@4.3.1",
   "scripts": {
-    "build": "dev/scripts.sh build",
-    "clean": "dev/scripts.sh clean",
-    "dev": "dev/scripts.sh dev",
-    "item:create": "dev/scripts.sh create_item",
-    "table:create": "dev/scripts.sh create_articles_table",
-    "table:delete": "dev/scripts.sh delete_articles_table",
+    "build": "bin/scripts.sh build",
+    "clean": "bin/scripts.sh clean",
+    "bin": "bin/scripts.sh bin",
+    "item:create": "bin/db.sh create_item",
+    "table:create": "bin/db.sh create_table",
+    "table:read": "bin/db.sh read_table",
+    "table:delete": "bin/db.sh delete_table",
     "test": "echo 'Test'"
   },
   "type": "module"
