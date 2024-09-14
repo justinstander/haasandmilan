@@ -68,20 +68,26 @@ function create_item {
   echo "...done"
 }
 
+function build_file() {
+  build_head "$1" "$2" "This is the $2 page" &&
+  build_css "$1"
+}
+
 function render() {
   echo "Create page $1"
   fileName="build/$1.html"
-  cp src/page.html "$fileName" &&
-    build_head "$fileName" "$1" "This is the $1 page" &&
-    build_css "$fileName"
-
+  cp src/page.html "$fileName"
+  build_file "$fileName" "$1"
 }
 
 function render_pages() {
   echo "Rendering pages in DB table: $1"
   for page in $(aws dynamodb scan --table-name "$1" | jq -r ".Items[].pageName.S"); do render "$page"; done
-  render "404"
-  render "503"
+  
+  cp src/public/*.html build/
+  build_file build/404.html 'Not Found'
+  build_file build/503.html 'Error'
+  
   echo "...done"
 }
 
