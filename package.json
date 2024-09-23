@@ -4,7 +4,7 @@
   "scripts": {
     "build": "bin/scripts.sh build",
     "clean": "bin/scripts.sh clean",
-    "bin": "bin/scripts.sh bin",
+    "deploy": "bin/scripts.sh deploy",
     "item:create": "bin/db.sh create_item",
     "table:create": "bin/db.sh create_table",
     "table:read": "bin/db.sh read_table",

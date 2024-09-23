@@ -43,6 +43,10 @@ function clean() {
   rm -rf build
 }
 
+function deploy() {
+  echo "todo: Deploy"
+}
+
 function dev() {
   echo 'starting dev server'
   build &&
